@@ -5,7 +5,7 @@
 #include "Common.h"
 #include "TimerOne.h"
 
-enum Button { CLICK = 0, DOUBLE_CLICK, PRESSED, UNPRESSED, UP, DOWN };
+enum Button { CLICK = 0, DOUBLE_CLICK, PRESS, RELEASE, UP, DOWN };
 
 class Controller {
 

@@ -28,14 +28,14 @@ void Controller::update( ) {
 
     if(tempEncPos > tempOldEncPos) {
 #if CONTROLLER_DEBUG
-      Serial.println(F("Aumentado"));
+      Serial.println(F("Up"));
 #endif
 
       this->upFunc[UP]( );
 
     } else if(tempEncPos < tempOldEncPos) {
 #if CONTROLLER_DEBUG
-      Serial.println(F("Disminuido"));
+      Serial.println(F("Down"));
 #endif
 
       this->upFunc[DOWN]( );
@@ -45,16 +45,16 @@ void Controller::update( ) {
   if(this->buttonState != 0) {
     if(buttonState == 3) {
 #if CONTROLLER_DEBUG
-      Serial.println("Pulsado");
+      Serial.println("Press");
 #endif
 
-      this->upFunc[PRESSED]( );
+      this->upFunc[PRESS]( );
     } else if(buttonState == 4) {
 #if CONTROLLER_DEBUG
-      Serial.println("Soltado");
+      Serial.println("Release");
 #endif
 
-      this->upFunc[UNPRESSED]( );
+      this->upFunc[RELEASE]( );
     } else if(buttonState == 5) {
 #if CONTROLLER_DEBUG
       Serial.println("Click");
@@ -63,10 +63,10 @@ void Controller::update( ) {
       this->upFunc[CLICK]( );
     } else if(buttonState == 6) {
 #if CONTROLLER_DEBUG
-      Serial.println("Doble Click");
+      Serial.println("Double Click");
 #endif
 
-this->upFunc[DOUBLE_CLICK]( );
+      this->upFunc[DOUBLE_CLICK]( );
     }
   }
 }
