@@ -5,6 +5,10 @@
 #include "Common.h"
 #include "TimerOne.h"
 
+
+class ControllerAction;
+class LcdManager;
+
 enum Button { CLICK = 0, DOUBLE_CLICK, PRESS, RELEASE, UP, DOWN };
 
 class Controller {
@@ -20,14 +24,21 @@ class Controller {
 
   void timerIsr( );
 
-  void setFunctionality(void (*newFunc)( ), Button action = CLICK);
+  // Asign a funtionality to an action
+  void setFunctionality(ControllerAction* newControllerAction,
+                        Button            actionId = CLICK);
+
+  LcdManager* getLcdManager( );
 
   private:
-  int16_t      oldEncPos, encPos;
-  uint8_t      buttonState;
+  int16_t oldEncPos, encPos;
+  uint8_t buttonState;
+
   ClickEncoder encoder = ClickEncoder(PIN_A, PIN_B, PIN_SW, STEPS);
 
-  void (*upFunc[6])( );
+  ControllerAction** actions;
+
+  LcdManager* manager;
 };
 
 void wrapperIsr( );

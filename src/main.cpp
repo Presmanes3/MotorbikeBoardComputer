@@ -1,50 +1,35 @@
 #include "Dependencies.h"
 
-Controller myController;
-Lcd        myLcd;
-
-void clickTest( );
-void doubleClickTest( );
-void pressTest( );
-void releaseTest( );
-void upTest( );
-void downTest( );
+LcdManager* mainLcdManager;
 
 void setup( ) {
 
   Serial.begin(9600);
 
-  Timer1.initialize(1000);
-  Timer1.attachInterrupt(wrapperIsr);
+  mainLcdManager = new LcdManager( );
 
-  myController.setup( );
+  mainLcdManager->getFrameManager( )->addFrame(new MainFrame( ));
 
-  myLcd.setup( );
+  mainLcdManager->getController( )->setFunctionality(new MainFrameAction::Up( ),
+                                                     UP);
 
-  myController.setFunctionality(clickTest, CLICK);
-  myController.setFunctionality(doubleClickTest, DOUBLE_CLICK);
-  myController.setFunctionality(pressTest, PRESS);
-  myController.setFunctionality(releaseTest, RELEASE);
-  myController.setFunctionality(upTest, UP);
-  myController.setFunctionality(downTest, DOWN);
+  mainLcdManager->getController( )->setFunctionality(
+      new MainFrameAction::Down( ), DOWN);
+
+  mainLcdManager->getController( )->setFunctionality(
+      new MainFrameAction::Click( ), CLICK);
+
+  mainLcdManager->getController( )->setFunctionality(
+      new MainFrameAction::Press( ), PRESS);
+
+  mainLcdManager->getController( )->setFunctionality(
+      new MainFrameAction::Null( ), RELEASE);
 
   // put your setup code here, to run once:
 }
 
 void loop( ) {
 
-  myController.update( );
-  myLcd.update( );
-
-  // put your main code here, to run repeatedly:
+  mainLcdManager->update( );
+  mainLcdManager->draw( );
 }
-
-// Wrapper to the Encoder ISR
-void wrapperIsr( ) { myController.timerIsr( ); }
-
-void clickTest( ) { Serial.println(F("Clicked")); }
-void doubleClickTest( ) { Serial.println(F("Double Clicked")); }
-void pressTest( ) { Serial.println(F("Press")); }
-void releaseTest( ) { Serial.println(F("Release")); }
-void upTest( ) { Serial.println(F("Up")); }
-void downTest( ) { Serial.println(F("Down")); }

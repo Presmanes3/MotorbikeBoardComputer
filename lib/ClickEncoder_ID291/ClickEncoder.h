@@ -16,7 +16,7 @@
 // defaults-------------------------------------------------------------
 
 #define BTN_DOUBLECLICKTIME 400 // second click within 400ms
-#define BTN_HOLDTIME 1000       // report held button after 1s
+#define BTN_HOLDTIME 250        // report held button after 1s
 
 // ----------------------------------------------------------------------------
 
