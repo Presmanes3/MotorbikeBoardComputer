@@ -2,6 +2,7 @@
 
 #include "AbstractClasses/LcdFrame.h"
 
+
 void FrameManager::setup( ) {
   this->screen.begin( );
 
@@ -16,18 +17,15 @@ void FrameManager::setup( ) {
 
 // Draw method
 void FrameManager::draw( ) {
-  if(millis( ) - currentTime >= (1000 / FPS)) {
+  if(millis( ) - currentTime >= (1000 / FPS)) { // FPS measurement
     this->screen.firstPage( );
     do { this->currentFrame->draw( ); } while(this->screen.nextPage( ));
   }
 }
 
-void FrameManager::addFrame(LcdFrame* newFrame) {
-  this->framePool[this->totalFrames] = newFrame;
-  this->totalFrames++;
+void FrameManager::addFrame(uint8_t position, LcdFrame* newFrame) {
+  this->framePool[position] = newFrame;
 }
-// Point to a new frame
-void FrameManager::setFrame(LcdFrame* frame) { this->currentFrame = frame; }
 
 // Return current frame
 LcdFrame* FrameManager::getFrame( ) { return this->currentFrame; }

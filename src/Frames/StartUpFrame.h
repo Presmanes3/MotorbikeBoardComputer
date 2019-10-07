@@ -5,6 +5,7 @@
 
 #define STARTING_MESSAGE "Booting System!"
 
+
 class StartUpFrame : public LcdFrame {
 
   void setup( ) override;

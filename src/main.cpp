@@ -8,7 +8,8 @@ void setup( ) {
 
   mainLcdManager = new LcdManager( );
 
-  mainLcdManager->getFrameManager( )->addFrame(new MainFrame( ));
+  mainLcdManager->getFrameManager( )->addFrame(
+      GlobalMenu::FrameNames::mainFrame, new MainFrame( ));
 
   mainLcdManager->getController( )->setFunctionality(new MainFrameAction::Up( ),
                                                      UP);

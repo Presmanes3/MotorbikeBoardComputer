@@ -8,6 +8,6 @@ void StartUpFrame::setup( ) {
 }
 
 void StartUpFrame::draw( ) {
- // this->lcd->getScreen( )->drawStr(LCD_WIDTH / 2, LCD_HEIGHT / 2,
+  // this->lcd->getScreen( )->drawStr(LCD_WIDTH / 2, LCD_HEIGHT / 2,
   //                                 F(STARTING_MESSAGE));
 }

@@ -5,6 +5,7 @@
  * machine with lots of states inside (Frames)*/
 
 #include "../Common.h"
+#include "../GlobalMenuStates.h"
 #include "U8glib.h"
 
 #define FPS 30
@@ -21,25 +22,27 @@ class FrameManager {
 
   void setupCurrentFrame( );
 
-  // Point to new frame
-  void setFrame(LcdFrame* frame);
+  // Use an enum to point to a new Frame, be sure the indexes are the same
+  template <typename frameName> void setFrame(frameName frame) {
+    this->currentFrame = this->framePool[frame];
+  };
 
-  void addFrame(LcdFrame* newFrame);
+  void addFrame(uint8_t position, LcdFrame* newFrame);
 
   void goNextFrame( );
   void goPreviousFrame( );
 
-  // Get current frame
+  // Get a pointer to the current frame
   LcdFrame* getFrame( );
 
+  // Get a pointer to the current Screen
   U8GLIB_ST7920_128X64* getScreen( );
 
   private:
   uint32_t currentTime; // Current time to mesure fps
 
-  LcdFrame** framePool;
+  LcdFrame** framePool;    // Group of frames
   LcdFrame*  currentFrame; // Current fame being displayed
-  uint32_t   totalFrames = 0;
 
   U8GLIB_ST7920_128X64 screen =
       U8GLIB_ST7920_128X64(LCD_SCK, LCD_MOSI, LCD_CS, U8G_PIN_NONE);

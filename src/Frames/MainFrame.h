@@ -11,9 +11,6 @@ class MainFrame : public LcdFrame {
   void draw( ) override;
   void setup( ) override;
 
-  void setState(GlobalMenuStates* newState) override;
-
-  private:
 };
 
 #endif // !_MAIN_FRAME_H_
