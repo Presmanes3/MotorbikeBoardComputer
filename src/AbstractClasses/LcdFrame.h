@@ -13,14 +13,17 @@ class LcdFrame { // State of a State Machine
 
   void setFrameManager(FrameManager* newManager);
 
-  virtual void setState(GlobalMenuStates* newState) = 0;
+  template <typename machineState> void setState(machineState newMachineState) {
+    this->currentMachineState = newMachineState;
+  };
 
   FrameManager* getManager( );
 
   protected:
   /*Lcd which this frame is from */
-  FrameManager*     manager;
-  GlobalMenuStates* globalMenuStates;
+  FrameManager* manager;
+
+  uint8_t currentMachineState;
 };
 
 #endif // !_LCD_FRAME_H_
