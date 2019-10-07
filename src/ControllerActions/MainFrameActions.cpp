@@ -7,18 +7,31 @@
 #include "../Managers/LcdManager.h"
 
 void MainFrameAction::Up::execute( ) {
-LcdFrame* tempFrame = this->getController( )
-      ->getLcdManager( )
-      ->getFrameManager( )
-      ->getFrame( );
-  
-      tempFrame->setState(tempFrame->getGlobalMenuStates()::);
+  LcdFrame* tempFrame =
+      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
+
+  tempFrame->setState(GlobalMenu::Frames::Main::LedStrip);
 }
 
-void MainFrameAction::Down::execute( ) { return; }
+void MainFrameAction::Down::execute( ) {
+  LcdFrame* tempFrame =
+      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
 
-void MainFrameAction::Click::execute( ) { return; }
+  tempFrame->setState(GlobalMenu::Frames::Main::Accelerometer);
+}
 
-void MainFrameAction::Press::execute( ) { return; }
+void MainFrameAction::Click::execute( ) {
+  LcdFrame* tempFrame =
+      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
+
+  tempFrame->setState(GlobalMenu::Frames::Main::Time);
+}
+
+void MainFrameAction::Press::execute( ) {
+  LcdManager* tempLcdManager = this->getController( )->getLcdManager( );
+
+  tempLcdManager->getFrameManager( )->setFrame(
+      GlobalMenu::FrameNames::mainFrame);
+}
 
 void MainFrameAction::Null::execute( ) { return; }
