@@ -8,21 +8,28 @@
 
 class LcdFrame { // State of a State Machine
   public:
+  // Initialize the frame
   virtual void setup( ) = 0;
-  virtual void draw( )  = 0;
 
+  // Draw the frame into the lcd
+  virtual void draw( ) = 0;
+
+  // Set a new frame manager
   void setFrameManager(FrameManager* newManager);
 
+  // Pass a new state (enum) in order to manage the logic of the frame
   template <typename machineState> void setState(machineState newMachineState) {
     this->currentMachineState = newMachineState;
   };
 
+  // Return the manager
   FrameManager* getManager( );
 
   protected:
   /*Lcd which this frame is from */
   FrameManager* manager;
 
+  // State based on the enum passed through setState
   uint8_t currentMachineState;
 };
 
