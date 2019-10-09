@@ -1,30 +1,29 @@
 #include "Dependencies.h"
 
-LcdManager* mainLcdManager;
+LcdManager*   mainLcdManager;
+FrameManager* projectFrameManager;
+Controller*   projectController;
 
 void setup( ) {
 
   Serial.begin(9600);
 
-  mainLcdManager = new LcdManager( );
+  mainLcdManager      = new LcdManager( );
+  projectFrameManager = mainLcdManager->getFrameManager( );
+  projectController   = mainLcdManager->getController( );
 
-  mainLcdManager->getFrameManager( )->addFrame(
-      GlobalMenu::FrameNames::mainFrame, new MainFrame( ));
+  projectFrameManager->addFrame(GlobalMenu::FrameNames::startUpFrame,
+                                new StartUpFrame( ));
 
-  mainLcdManager->getController( )->setFunctionality(new MainFrameAction::Up( ),
-                                                     UP);
+  projectFrameManager->setFrame(GlobalMenu::FrameNames::startUpFrame);
 
-  mainLcdManager->getController( )->setFunctionality(
-      new MainFrameAction::Down( ), DOWN);
+  projectFrameManager->addFrame(GlobalMenu::FrameNames::mainFrame,
+                                new MainFrame( ));
 
-  mainLcdManager->getController( )->setFunctionality(
-      new MainFrameAction::Click( ), CLICK);
+  projectFrameManager->draw( );
+  delay(STARTING_DELAY);
 
-  mainLcdManager->getController( )->setFunctionality(
-      new MainFrameAction::Press( ), PRESS);
-
-  mainLcdManager->getController( )->setFunctionality(
-      new MainFrameAction::Null( ), RELEASE);
+  projectFrameManager->setFrame(GlobalMenu::FrameNames::mainFrame);
 
   // put your setup code here, to run once:
 }
