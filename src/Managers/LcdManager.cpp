@@ -1,8 +1,5 @@
 #include "LcdManager.h"
 
-#include "Controller.h"
-#include "FrameManager.h"
-
 void LcdManager::setup( ) {
 
   if(this->frameManager == nullptr) {

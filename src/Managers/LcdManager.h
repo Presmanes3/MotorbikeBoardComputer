@@ -5,10 +5,9 @@
  * trough a common class*/
 
 #include "../Common.h"
+#include "Controller.h"
+#include "FrameManager.h"
 #include "U8glib.h"
-
-class Controller;
-class FrameManager;
 
 #define FPS 30
 #define LCD_WIDTH 128
