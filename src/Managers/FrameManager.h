@@ -13,6 +13,7 @@
 #define LCD_HEIGHT 64
 
 class LcdFrame;
+class LcdManager;
 
 class FrameManager {
 
@@ -29,7 +30,10 @@ class FrameManager {
 
   void addFrame(uint8_t position, LcdFrame* newFrame);
 
+  // TODO define goNextFrame()
   void goNextFrame( );
+
+  // TODO define goPreviousFrame()
   void goPreviousFrame( );
 
   // Get a pointer to the current frame
@@ -38,14 +42,20 @@ class FrameManager {
   // Get a pointer to the current Screen
   U8GLIB_ST7920_128X64* getScreen( );
 
+  // Return lcd manager
+  LcdManager* getLcdManager( );
+
   private:
   uint32_t currentTime; // Current time to mesure fps
 
   LcdFrame** framePool;    // Group of frames
   LcdFrame*  currentFrame; // Current fame being displayed
 
+  // Screen of library U8glib
   U8GLIB_ST7920_128X64 screen =
       U8GLIB_ST7920_128X64(LCD_SCK, LCD_MOSI, LCD_CS, U8G_PIN_NONE);
+
+  LcdManager* manager;
 };
 
 #endif // !_FRAME_MANAGER_H_
