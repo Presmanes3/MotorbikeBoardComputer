@@ -6,32 +6,18 @@
 #include "../Managers/FrameManager.h"
 #include "../Managers/LcdManager.h"
 
-void MainFrameAction::Up::execute( ) {
-  LcdFrame* tempFrame =
-      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
+void MainFrameAction::Up::execute( ) { return; }
 
-  tempFrame->setState(GlobalMenu::Frames::Main::LedStrip);
-}
+void MainFrameAction::Down::execute( ) { return; }
 
-void MainFrameAction::Down::execute( ) {
-  LcdFrame* tempFrame =
-      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
-
-  tempFrame->setState(GlobalMenu::Frames::Main::Accelerometer);
-}
-
-void MainFrameAction::Click::execute( ) {
-  LcdFrame* tempFrame =
-      this->getController( )->getLcdManager( )->getFrameManager( )->getFrame( );
-
-  tempFrame->setState(GlobalMenu::Frames::Main::Time);
-}
+void MainFrameAction::Click::execute( ) { return; }
 
 void MainFrameAction::Press::execute( ) {
-  LcdManager* tempLcdManager = this->getController( )->getLcdManager( );
+  FrameManager* tempFrameManager =
+      this->getController( )->getLcdManager( )->getFrameManager( );
 
-  tempLcdManager->getFrameManager( )->setFrame(
-      GlobalMenu::FrameNames::mainFrame);
+  // change to configuration frame
+  tempFrameManager->setFrame(GlobalMenu::FrameNames::configuration);
 }
 
 void MainFrameAction::Null::execute( ) { return; }
