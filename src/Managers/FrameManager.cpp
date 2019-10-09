@@ -1,7 +1,7 @@
 #include "FrameManager.h"
 
 #include "AbstractClasses/LcdFrame.h"
-
+#include "LcdManager.h"
 
 void FrameManager::setup( ) {
   this->screen.begin( );
@@ -18,6 +18,9 @@ void FrameManager::setup( ) {
 // Draw method
 void FrameManager::draw( ) {
   if(millis( ) - currentTime >= (1000 / FPS)) { // FPS measurement
+#if LCD_MANAGER_DEBUG
+    Serial.println(F("Drawing"));
+#endif
     this->screen.firstPage( );
     do { this->currentFrame->draw( ); } while(this->screen.nextPage( ));
   }
@@ -35,3 +38,5 @@ U8GLIB_ST7920_128X64* FrameManager::getScreen( ) { return &(this->screen); }
 
 // Start current frame
 void FrameManager::setupCurrentFrame( ) { this->currentFrame->setup( ); }
+
+LcdManager* FrameManager::getLcdManager( ) { return this->manager; }
